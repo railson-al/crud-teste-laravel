@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 use Exception;
+use Illuminate\Support\Facades\Redirect;
 
 class PatientController extends Controller
 {
@@ -110,9 +111,14 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        $patient = Patient::findOrFail($id);
-        
-        return view("forms.patients", ["patient" => $patient]);
+        try{
+
+            $selectedPatient = Patient::findOrFail($id);
+            return response()->json($selectedPatient);
+
+        }catch(Exception $err) {
+            return response()->json($err);
+        }
     }
 
     /**
@@ -127,18 +133,22 @@ class PatientController extends Controller
         $patient = Patient::findOrFail($id);
 
         try {
+
             $data = $patient->update($request->all());
             $response['status'] = true;
             $response['message'] = 'Usuário alterado com sucesso';
-            echo json_encode($response);
-            return;
+            // echo json_encode($response);
+            // return Redirect::route('patients');
+            return response()->json($response);
+
 
         } catch (Exception $err) {
             $response['status'] = false;
             $response['message'] = 'Não foi possível concluir as alterações';
             $response['error'] = $err->getMessage();
-            echo json_encode($response);
-            return;
+            // echo json_encode($response);
+            // return Redirect::route('patients');
+            return response()->json($response);
 
         }
         

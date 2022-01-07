@@ -1,17 +1,17 @@
 $(document).ready( function() {
 
     //name, age, cpf and phone mask
-    $('#phone').mask("(00) 00000-0009");
-    $('#phone').blur(function() {
+    $('input[name=phone]').mask("(00) 00000-0009");
+    $('input[name=phone]').blur(function() {
         if($(this).val().length == 15) {
-            $('#phone').mask("(00) 00000-0009");    
+            $('input[name=phone]').mask("(00) 00000-0009");    
         } else {
-            $('#phone').mask("(00) 0000-00009");
+            $('input[name=phone]').mask("(00) 0000-00009");
         }
     });
     
-    $('#cpf').mask('000.000.000-00');
-    $('#age').mask('990');
+    $('input[name=cpf]').mask('000.000.000-00');
+    $('input[name=age]').mask('990');
 
     //form validation with JQuery Ajax
     $('#patients-form').submit(function(e) {
@@ -29,11 +29,11 @@ $(document).ready( function() {
                 },
             });
 
-        $('#cpf').mask('00000000000');
-        if($('#phone').val().length == 15) {
-            $('#phone').mask("00000000009");    
+        $('input[name=cpf]').mask('00000000000');
+        if($('input[name=phone]').val().length == 15) {
+            $('input[name=phone]').mask("00000000009");    
         } else {
-            $('#phone').mask("00000000009");
+            $('input[name=phone]').mask("00000000009");
         }
 
         const token = $(this).find("_token").val();
@@ -45,7 +45,7 @@ $(document).ready( function() {
 
         $.ajax({
             url: "/patients",
-            method: "post",
+            method: "POST",
             enctype: "multipart/form-data",
             data: new FormData(this),
             processData: false,
@@ -66,9 +66,10 @@ $(document).ready( function() {
     //form edit validation
     $('#patients-form-edit').submit(function(e) {
         e.preventDefault();
+       
 
             //inputs validations
-            $('#patients-form').validate({
+            $('#patients-form-edit').validate({
                 rules: {
                     name: {
                         minWords: 2,
@@ -79,26 +80,34 @@ $(document).ready( function() {
                 },
             });
 
-        $('#cpf').mask('00000000000');
-        if($('#phone').val().length == 15) {
-            $('#phone').mask("00000000009");    
+        $('input[name=cpf]').mask('00000000000');
+        if($('input[name=phone]').val().length == 15) {
+            $('input[name=phone]').mask("00000000009");    
         } else {
-            $('#phone').mask("00000000009");
+            $('input[name=phone]').mask("00000000009");
         }
 
-        const token = $(this).find("_token").val();
-        const name = $(this).find('input#name').val();
-        const phone = $(this).find('input#phone').val();
-        const age = $(this).find('input#age').val();
-        const valid_cpf = $(this).find('input#cpf').val();      
-        const file_path = $(this).find('input#file_path')[0].files[0];
-        const id = $(this).find('input#patient-id').val()
+        const id = $(this).find('input#patient-id').val();
+        const _token = $(this).find("input[name=_token]").val();
+        const name = $(this).find('input#name-edit').val();
+        const phone = $(this).find('input#phone-edit').val();
+        const age = $(this).find('input#age-edit').val();
+        const cpf = $(this).find('input#cpf-edit').val();      
+        const file_path = $(this).find('input#file_path-edit')[0].files[0];
 
         $.ajax({
             url: `/patients/${id}/update`,
-            method: "post",
+            type: "PUT",
             enctype: "multipart/form-data",
-            data: new FormData(this),
+            data: {
+                id:id,
+                _token: _token,
+                name:name,
+                phone:phone,
+                age:age,
+                cpf:cpf,
+                file_path:file_path
+            },
             processData: false,
             contentType: false,
             dataType: "json",
@@ -144,7 +153,9 @@ $(document).ready( function() {
     //requisitando paciente para criação da ficha
     $('#capture-symptoms').submit(function(e) {
         //e.preventDefault();
-        $('#cpf').mask('00000000000');
+        $('input[name=cpf]').mask('00000000000');
 
     });
 });
+
+//show form edit
