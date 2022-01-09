@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -17,6 +17,7 @@
     <script type="text/javascript" src="{{ asset('_js/additional-methods.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -88,6 +89,5 @@
 
     </div>
 
-    @stack('customjs')
 </body>
 </html>

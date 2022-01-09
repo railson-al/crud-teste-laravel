@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 use Exception;
-use Illuminate\Support\Facades\Redirect;
+
 
 class PatientController extends Controller
 {
@@ -130,6 +130,8 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        dd($request->all());
         $patient = Patient::findOrFail($id);
 
         try {

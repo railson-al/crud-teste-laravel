@@ -1,5 +1,11 @@
 $(document).ready( function() {
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     //name, age, cpf and phone mask
     $('input[name=phone]').mask("(00) 00000-0009");
     $('input[name=phone]').blur(function() {
@@ -36,12 +42,7 @@ $(document).ready( function() {
             $('input[name=phone]').mask("00000000009");
         }
 
-        const token = $(this).find("_token").val();
-        const name = $(this).find('input#name').val();
-        const phone = $(this).find('input#phone').val();
-        const age = $(this).find('input#age').val();
-        const valid_cpf = $(this).find('input#cpf').val();      
-        const file_path = $(this).find('input#file_path')[0].files[0];
+
 
         $.ajax({
             url: "/patients",
@@ -88,7 +89,6 @@ $(document).ready( function() {
         }
 
         const id = $(this).find('input#patient-id').val();
-        const _token = $(this).find("input[name=_token]").val();
         const name = $(this).find('input#name-edit').val();
         const phone = $(this).find('input#phone-edit').val();
         const age = $(this).find('input#age-edit').val();
@@ -99,15 +99,7 @@ $(document).ready( function() {
             url: `/patients/${id}/update`,
             type: "PUT",
             enctype: "multipart/form-data",
-            data: {
-                id:id,
-                _token: _token,
-                name:name,
-                phone:phone,
-                age:age,
-                cpf:cpf,
-                file_path:file_path
-            },
+            data: new FormData(this),
             processData: false,
             contentType: false,
             dataType: "json",
@@ -129,13 +121,11 @@ $(document).ready( function() {
         e.preventDefault();
         var data = $(this).data(); 
         var element = $(this).parent();
-        var token = $("meta[name='csrf-token']").attr("content");
 
         $.ajax({
             url: `/patients/${data.id}/delete`,
             type: 'DELETE',
             data: {
-                "_token": token,
                 "id": data.id
             },
             dataType: 'json',
