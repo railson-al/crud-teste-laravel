@@ -145,9 +145,9 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="patients-form-edit" enctype="multipart/form-data">
+                                    <form id="patients-form-edit" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        
+                                        @method('POST')
                                         <input type="hidden" name="patient-id" id="patient-id">
 
                                         <div class="row mb-3">

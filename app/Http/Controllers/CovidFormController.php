@@ -34,18 +34,23 @@ class CovidFormController extends Controller
             return view('forms.form', ['patient' => $patient]);
 
         } else {
-            return back()->withErrors(['error', 'CPF não cadastrado!']);
+            return back()->withErrors(['CPF não cadastrado!']);
         }
         
     }
 
     public function result(Request $request) {
-        
+   
         $symptoms = $request->symptoms;
+
+        if(!isset($symptoms)) {
+
+            return back()->withErrors(['Selecione ao menos um sintoma!']);
+
+        }
 
         $response['symptoms'] = $symptoms;
         $response['number'] = count($symptoms);
-        
         $response['percent'] = ($response['number'] / 14) * 100;
 
         if ($response['percent'] >= 60) {

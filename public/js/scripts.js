@@ -66,8 +66,7 @@ $(document).ready( function() {
 
     //form edit validation
     $('#patients-form-edit').submit(function(e) {
-        e.preventDefault();
-       
+        e.preventDefault();   
 
             //inputs validations
             $('#patients-form-edit').validate({
@@ -97,7 +96,7 @@ $(document).ready( function() {
 
         $.ajax({
             url: `/patients/${id}/update`,
-            type: "PUT",
+            method: "POST",
             enctype: "multipart/form-data",
             data: new FormData(this),
             processData: false,

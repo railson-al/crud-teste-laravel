@@ -19,7 +19,7 @@ Route::namespace('App\Http\Controllers')->group(function() {
     Route::post('/patients', 'PatientController@store')->name('create.patient');
     Route::get('/patients/create', 'PatientController@create')->name('form.patient');
     Route::get('/patients/{id}/edit', 'PatientController@edit')->name('form.edit.patient');
-    Route::put('/patients/{id}/update', 'PatientController@update')->name('update.patient');
+    Route::post('/patients/{id}/update', 'PatientController@update')->name('update.patient');
     Route::delete('/patients/{id}/delete', 'PatientController@destroy')->name('delete.patient');
 
     Route::get('/covid-form', 'CovidFormController@index')->name('form.covid');
