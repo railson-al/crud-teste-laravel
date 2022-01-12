@@ -5,20 +5,34 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Resultado</div>
-                    <div class="d-flex justify-content-center m-4">
-                        <span class="card-title fw-bolder" for="">{{ $response['message'] }}</span>
+                <div class="card-header">Resultado </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <span class="card-title fw-bolder">STATUS:&nbsp;</span>
+                        <span class="card-title fw-bolder @if($response['result'] !== 'SINTOMAS INSUFICIENTES') text-danger @else text-info @endif" for="">{{ $response['result'] }}</span>
                     </div>
 
-                    <div class="d-flex justify-content-around wrap">
-                        <p class="fw-bold"> Sintomas: </p>
-                        @foreach ($response['symptoms'] as $symptom)
-                        <p class="gap-1" for="">{{ $symptom }}</p>
-                        @endforeach
+                    <div class="d-flex justify-content-center">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="fw-bold text-center">Sintomas</th>
+                                </tr>
+                            </thead>
+                            
+                           
+                            
+                            <tbody>
+                                @foreach ($response['symptoms'] as $symptom)
+                                <tr>
+                                    <th scope="row" class="">{{ $symptom }}</th>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="d-flex justify-content-center m-4">
-                        <span maxlength="5" for="">Percentual: {{ $response['percent'] }}%</span>
+                        <span class="bg-primary text-light fw-bold w-100 p-1 text-center">Percentual: {{ $response['percent'] }}%</span>
                     </div>
 
                     

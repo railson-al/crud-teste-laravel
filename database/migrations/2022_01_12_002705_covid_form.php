@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePatientsTable extends Migration
+class CovidForm extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreatePatientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('patients', function (Blueprint $table) {
+        Schema::create('covid_forms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('age');
-            $table->string('cpf');
-            $table->string('phone');
-            $table->string('file_path');
+            $table->foreignId('patient_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->longText('symptoms');
+            $table->string('result');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +31,6 @@ class CreatePatientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists('covid_forms');
     }
 }

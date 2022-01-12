@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> Nova Ficha </div>
+                <div class="card-header"> Nova Ficha</div>
 
                 <div class="card-body">
                     <form method="POST" id="capture-symptoms" action="{{ route('form.covid.create') }}" enctype="multipart/form-data">
@@ -40,6 +40,9 @@
                     @csrf
 
                     <input type="hidden" name="cpf" value="{{ $patient->cpf }}">
+                    <input type="hidden" name="user_id" id="user_id" value="{{auth()->user()->id}}">
+
+
                     <div class="card-header">
                         <label class="form-check-label">Paciente:</label>
                         <label class="form-check-label">{{ $patient->name }}</label>

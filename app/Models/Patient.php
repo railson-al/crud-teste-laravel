@@ -22,4 +22,9 @@ class Patient extends Model
         'deleted_at'
     ];
 
+    public function covidForm() {
+
+        return $this->hasMany(CovidForm::class);
+    }
+
 }
