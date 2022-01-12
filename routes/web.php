@@ -23,6 +23,7 @@ Route::namespace('App\Http\Controllers')->group(function() {
     Route::delete('/patients/{id}/delete', 'PatientController@destroy')->name('delete.patient');
 
     Route::get('/covid-form', 'CovidFormController@index')->name('form.covid');
+    Route::get('covid-form/{id}', 'CovidFormController@show')->name('form.covid.view');
     Route::post('/covid-form', 'CovidFormController@findUser')->name('form.covid.create');
     Route::post('/covid-form/result', 'CovidFormController@result')->name('form.covid.create.result');
 }); 

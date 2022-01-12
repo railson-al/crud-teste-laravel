@@ -21,6 +21,21 @@ class CovidFormController extends Controller
         return view('forms.symptoms', ['forms' => $forms]);
     }
 
+    public function show($id) {
+        
+        try {
+
+            $form = CovidForm::findOrFail($id);
+           
+        }catch(Exception $err) {
+
+            return response()->json($err);
+        }
+
+        return response()->json($form);
+        
+    }
+
     public function findUser(Request $request) {
 
         try{ 
