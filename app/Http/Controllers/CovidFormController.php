@@ -17,7 +17,8 @@ class CovidFormController extends Controller
      */
     public function index()
     {
-        return view('forms.symptoms');
+        $forms = CovidForm::get();
+        return view('forms.symptoms', ['forms' => $forms]);
     }
 
     public function findUser(Request $request) {
@@ -42,13 +43,8 @@ class CovidFormController extends Controller
     }
 
     public function result(Request $request) {
+        // ddd($request->all());
         
-        $cpf = $request->cpf;
-        $cpf = trim($cpf);
-        $cpf = str_replace(".", "", $cpf);
-        $cpf = str_replace("-", "", $cpf);
-        $cpf = str_replace(" ", "", $cpf);
-        $cpf = str_replace("-", "", $cpf);
         $symptoms = $request->symptoms;
 
         if(!isset($symptoms)) { //check if symptoms has empty
@@ -57,10 +53,17 @@ class CovidFormController extends Controller
 
         }
 
+        $cpf = $request->cpf;
+        $cpf = trim($cpf);
+        $cpf = str_replace(".", "", $cpf);
+        $cpf = str_replace("-", "", $cpf);
+        $cpf = str_replace(" ", "", $cpf);
+        $cpf = str_replace("-", "", $cpf);
+
         //make response data
         $response['symptoms'] = $symptoms;
         $response['number'] = count($symptoms);
-        $response['percent'] = number_format(($response['number'] / 14) * 100, 2, ',');
+        $response['percent'] = floatval(number_format(($response['number'] / 14) * 100, 2, ','));
         
         //Calculate symptoms percentage result
         if ($response['percent'] >= 60) {
@@ -69,10 +72,11 @@ class CovidFormController extends Controller
         } elseif($response['percent'] >= 40) {
             $response['result'] = "POTENCIAL INFECTADO";
 
-        }else {
+        }elseif($response['percent'] <= 39)  {
             $response['result'] = "SINTOMAS INSUFICIENTES";
 
         }
+        // ddd($response);
 
         try {
             

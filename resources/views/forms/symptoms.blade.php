@@ -36,8 +36,40 @@
                     </form>   
                 </div>
             </div>
+        </div>
 
-            
+        <div class="col-md-8 mt-2">
+            <div class="card">
+                <div class="card-header"> Consultas Anteriores </div>
+
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Resultado</th>
+                            <th scope="col"></th>
+                            </tr>
+                        </thead>
+
+                @foreach($forms as $form)
+                 
+                        <tbody>
+                            <tr>
+                            <th scope="row">{{$form->id}}</th>
+                            <th scope="row">{{ $form->patient->name}}</th>
+                            <th scope="row">{{$form->result}}</th>
+                            <th scope="row">Ver</th>
+                            </tr>
+                          
+                        
+                @endforeach
+
+                </tbody>
+                </table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
