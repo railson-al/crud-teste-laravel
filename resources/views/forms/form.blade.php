@@ -69,7 +69,7 @@
                             <label class="form-check-label">Tosse</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symptoms[]" value="DOE DE CABEÇA">
+                            <input class="form-check-input" type="checkbox" name="symptoms[]" value="DOR DE CABEÇA">
                             <label class="form-check-label">Dor de Cabeça</label>
                         </div>
                         <div class="form-check">

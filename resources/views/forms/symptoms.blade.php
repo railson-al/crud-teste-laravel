@@ -75,8 +75,8 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="EditPatientModalLabel">Editar Paciente</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <h5 class="modal-title" id="EditPatientModalLabel">Resultado</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="card-body" id="patient">
@@ -100,7 +100,7 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" onclick="removeAppends()" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
 
                                 </div>
                             </div>
@@ -113,6 +113,10 @@
 
     <script type="text/javascript">
         function getForm(id) {
+
+            $('.list-group .list-group-item').remove();
+            $('#patient .list-group-item').remove();
+            $('#result .list-group-item').remove();
             
            $.get('covid-form/'+id, function(response) {
 
@@ -122,7 +126,6 @@
             var array_symptoms = symptoms.split(',');
             
             array_symptoms.forEach(symptom => {
-                console.log(symptom);
                 $('.list-group').append("<li class='list-group-item'>"+symptom+"</li>");
             });
 
@@ -132,11 +135,7 @@
            });
         }
 
-        function removeAppends() {
-            $('.list-group .list-group-item').remove();
-            $('#patient .list-group-item').remove();
-            $('#result .list-group-item').remove();
-        }
- 
+
+
     </script>
 @endsection
