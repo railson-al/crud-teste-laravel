@@ -121,6 +121,7 @@ $(document).ready( function() {
         var data = $(this).data(); 
         var element = $(this).parent();
 
+
         $.ajax({
             url: `/patients/${data.id}/delete`,
             type: 'DELETE',

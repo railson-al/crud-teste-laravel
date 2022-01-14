@@ -119,16 +119,16 @@
                         <tbody>
                             <tr id="patient-container-{{ $patient->id }}">
                                 <th scope="row">{{$patient->id}}</th>
-                                <td>{{ $patient->name}}</td>
-                                <td>{{$patient->phone}}</td>
-                                <td>
+                                <th scope="row">{{ $patient->name}}</th>
+                                <th scope="row">{{$patient->phone}}</th>
+                                <th scope="row">
                                     <a href="javascript:void(0)" class="btn btn-warning waves-effect" data-bs-toggle="modal" data-bs-target="#EditPatientModal" onclick='getPatient( {{$patient->id}} )'>Editar</a>
-                                </td>
-                                <td>
+                                </th>
+                                <th scope="row">
                                     <a href="#" data-id="{{$patient->id}}" class="btn btn-danger" data-action="#">
                                         Excluir
                                     </a>
-                                </td>
+                                </th>
                             </tr>
 
                             @endforeach
